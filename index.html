@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gründliches Lesen</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f4f0;
+      color: #1a1a18;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .wrap {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .gl-title {
+      font-size: 22px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .gl-sub {
+      font-size: 14px;
+      color: #5f5e5a;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .gl-prinzip {
+      background: #EEEDFE;
+      border: 0.5px solid #534AB7;
+      border-radius: 12px;
+      padding: 14px 20px;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .gl-prinzip-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #3C3489;
+      margin-bottom: 3px;
+    }
+
+    .gl-prinzip-sub {
+      font-size: 13px;
+      color: #534AB7;
+    }
+
+    .gl-arrow {
+      text-align: center;
+      color: #888780;
+      font-size: 20px;
+      margin: 6px 0;
+      line-height: 1;
+    }
+
+    .gl-step {
+      border: 0.5px solid #d3d1c7;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .gl-step:hover {
+      border-color: #b4b2a9;
+    }
+
+    .gl-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #ffffff;
+      cursor: pointer;
+      border: none;
+      text-align: left;
+      transition: background 0.15s;
+    }
+
+    .gl-btn:hover {
+      background: #f5f4f0;
+    }
+
+    .gl-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #E1F5EE;
+      border: 0.5px solid #0F6E56;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: #085041;
+      flex-shrink: 0;
+    }
+
+    .gl-label { flex: 1; }
+
+    .gl-label-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1a1a18;
+      margin-bottom: 2px;
+    }
+
+    .gl-label-hint {
+      font-size: 12px;
+      color: #5f5e5a;
+    }
+
+    .gl-chevron {
+      font-size: 18px;
+      color: #888780;
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+
+    .gl-step.open .gl-chevron {
+      transform: rotate(180deg);
+    }
+
+    .gl-step.open .gl-btn {
+      background: #f5f4f0;
+    }
+
+    .gl-detail {
+      display: none;
+      padding: 0 16px 16px 58px;
+      border-top: 0.5px solid #d3d1c7;
+      background: #f5f4f0;
+    }
+
+    .gl-step.open .gl-detail {
+      display: block;
+    }
+
+    .gl-detail p {
+      font-size: 13px;
+      color: #444441;
+      margin: 12px 0 8px;
+      line-height: 1.65;
+    }
+
+    .gl-tip {
+      background: #ffffff;
+      border: 0.5px solid #d3d1c7;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 8px;
+    }
+
+    .gl-tip-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #0F6E56;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .gl-tip-text {
+      font-size: 12px;
+      color: #1a1a18;
+      line-height: 1.55;
+    }
+
+    .gl-ziel {
+      background: #FAEEDA;
+      border: 0.5px solid #854F0B;
+      border-radius: 12px;
+      padding: 14px 20px;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .gl-ziel-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #633806;
+    }
+
+    @media (max-width: 480px) {
+      .gl-detail { padding-left: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="gl-title">Gründliches Lesen</h1>
+    <p class="gl-sub">Tiefe statt Tempo. Klicken Sie auf einen Schritt für mehr Details.</p>
+
+    <div class="gl-prinzip">
+      <p class="gl-prinzip-title">Kernprinzip</p>
+      <p class="gl-prinzip-sub">Vollständig, langsam, konzentriert.</p>
+    </div>
+
+    <div class="gl-arrow">&#8595;</div>
+
+    <div class="gl-step" id="s1">
+      <button class="gl-btn" onclick="toggle('s1')" aria-expanded="false">
+        <span class="gl-num">1</span>
+        <span class="gl-label">
+          <p class="gl-label-title">Wort für Wort lesen</p>
+          <p class="gl-label-hint">Nichts überspringen.</p>
+        </span>
+        <span class="gl-chevron">&#8964;</span>
+      </button>
+      <div class="gl-detail">
+        <p>Beim gründlichen Lesen wird jeder Satz vollständig erfasst. Kein Überfliegen, kein Springen. Das Tempo ist bewusst langsam, damit das Gehirn die Bedeutung tatsächlich verarbeiten kann und nicht nur die Wörter registriert.</p>
+        <div class="gl-tip">
+          <p class="gl-tip-label">Praxistipp</p>
+          <p class="gl-tip-text">Legen Sie den Finger unter die aktuelle Zeile. Das zwingt das Auge, beim Text zu bleiben, und verhindert unbewusstes Vorausspringen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gl-arrow">&#8595;</div>
+
+    <div class="gl-step" id="s2">
+      <button class="gl-btn" onclick="toggle('s2')" aria-expanded="false">
+        <span class="gl-num">2</span>
+        <span class="gl-label">
+          <p class="gl-label-title">Unbekanntes nachschlagen</p>
+          <p class="gl-label-hint">Begriffe klären, bevor weitergelesen wird.</p>
+        </span>
+        <span class="gl-chevron">&#8964;</span>
+      </button>
+      <div class="gl-detail">
+        <p>Unbekannte Fachbegriffe, Fremdwörter oder unklare Formulierungen werden sofort nachgeschlagen und nicht erst am Ende. Ein einziges nicht verstandenes Wort kann dazu führen, dass ganze Absätze falsch interpretiert werden.</p>
+        <div class="gl-tip">
+          <p class="gl-tip-label">Praxistipp</p>
+          <p class="gl-tip-text">Halten Sie ein Notizbuch oder eine Notiz-App bereit, um neue Begriffe zu sammeln und später zu vertiefen. So wird der Lesefluss nicht zu lange unterbrochen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gl-arrow">&#8595;</div>
+
+    <div class="gl-step" id="s3">
+      <button class="gl-btn" onclick="toggle('s3')" aria-expanded="false">
+        <span class="gl-num">3</span>
+        <span class="gl-label">
+          <p class="gl-label-title">Markieren und unterstreichen</p>
+          <p class="gl-label-hint">Kernaussagen hervorheben.</p>
+        </span>
+        <span class="gl-chevron">&#8964;</span>
+      </button>
+      <div class="gl-detail">
+        <p>Wichtige Stellen, Kernaussagen und Schlüsselbegriffe werden markiert oder unterstrichen. Das zwingt zur aktiven Entscheidung: Was ist wirklich wichtig? Diese Selektion ist bereits ein Denkprozess.</p>
+        <div class="gl-tip">
+          <p class="gl-tip-label">Praxistipp</p>
+          <p class="gl-tip-text">Nicht alles markieren, denn weniger ist mehr. Wer 80 % eines Textes unterstreicht, hat gar nichts hervorgehoben. Maximal 10 bis 15 % eines Abschnitts sind sinnvoll.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gl-arrow">&#8595;</div>
+
+    <div class="gl-step" id="s4">
+      <button class="gl-btn" onclick="toggle('s4')" aria-expanded="false">
+        <span class="gl-num">4</span>
+        <span class="gl-label">
+          <p class="gl-label-title">Notizen machen</p>
+          <p class="gl-label-hint">Gedanken und Fragen festhalten.</p>
+        </span>
+        <span class="gl-chevron">&#8964;</span>
+      </button>
+      <div class="gl-detail">
+        <p>Eigene Gedanken, Fragen, Zweifel oder Querverbindungen werden schriftlich festgehalten, am Rand des Textes oder in einem separaten Heft. Das verwandelt passives Lesen in einen aktiven Dialog mit dem Text.</p>
+        <div class="gl-tip">
+          <p class="gl-tip-label">Praxistipp</p>
+          <p class="gl-tip-text">Nutzen Sie Symbole: ein "?" für Unklares, ein "!" für Wichtiges, einen Pfeil für Querverbindungen. Das spart Zeit und macht Notizen auf einen Blick lesbar.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gl-arrow">&#8595;</div>
+
+    <div class="gl-step" id="s5">
+      <button class="gl-btn" onclick="toggle('s5')" aria-expanded="false">
+        <span class="gl-num">5</span>
+        <span class="gl-label">
+          <p class="gl-label-title">Abschnitte zusammenfassen</p>
+          <p class="gl-label-hint">Innehalten und reflektieren.</p>
+        </span>
+        <span class="gl-chevron">&#8964;</span>
+      </button>
+      <div class="gl-detail">
+        <p>Nach jedem Abschnitt oder Kapitel wird kurz pausiert und der Inhalt in eigenen Worten zusammengefasst. Das zeigt sofort, ob man den Text wirklich verstanden hat oder nur die Wörter gelesen hat.</p>
+        <div class="gl-tip">
+          <p class="gl-tip-label">Praxistipp</p>
+          <p class="gl-tip-text">Decken Sie den Text ab und formulieren Sie drei Sätze: Worum ging es? Was war die Hauptaussage? Was bleibt als Frage offen? Wenn das gelingt, ist der Abschnitt verstanden.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gl-arrow">&#8595;</div>
+
+    <div class="gl-step" id="s6">
+      <button class="gl-btn" onclick="toggle('s6')" aria-expanded="false">
+        <span class="gl-num">6</span>
+        <span class="gl-label">
+          <p class="gl-label-title">Bezüge herstellen</p>
+          <p class="gl-label-hint">Mit Vorwissen verknüpfen.</p>
+        </span>
+        <span class="gl-chevron">&#8964;</span>
+      </button>
+      <div class="gl-detail">
+        <p>Das Gelesene wird aktiv mit bereits vorhandenem Wissen verbunden. Gibt es Widersprüche? Bestätigt der Text etwas, das Sie schon wussten? Ergänzt er es? Dieses Verknüpfen ist der Schlüssel zum langfristigen Behalten.</p>
+        <div class="gl-tip">
+          <p class="gl-tip-label">Praxistipp</p>
+          <p class="gl-tip-text">Fragen Sie sich nach jedem Abschnitt: Wo habe ich das schon einmal gehört oder gelesen? Selbst schwache Verbindungen stärken das Gedächtnis erheblich.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gl-arrow">&#8595;</div>
+
+    <div class="gl-ziel">
+      <p class="gl-ziel-title">Ziel: Tiefes Verstehen und langfristiges Behalten.</p>
+    </div>
+  </div>
+
+  <script>
+    function toggle(id) {
+      var el = document.getElementById(id);
+      var btn = el.querySelector('button');
+      var isOpen = el.classList.contains('open');
+      el.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', !isOpen);
+    }
+  </script>
+</body>
+</html>
